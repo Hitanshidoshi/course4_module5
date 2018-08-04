@@ -6,7 +6,7 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
     if (screenWidth < 768) {
       $("#collapsable-nav").collapse('hide');
     }
-  });
+  }); 
 });
 
 (function (global) {
@@ -80,12 +80,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // *** start ***
 // On first load, show home view
+
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
-  allCategoriesUrl,
-  [...], // ***** <---- TODO: STEP 1: Substitute [...] ******
-  true); // Explicitely setting the flag to get JSON from server processed into an object literal
+  homeHtml,
+  function (responseText) {
+    document.querySelector("#main-content")
+      .innerHTML = responseText;
+  },
+  false);
 });
+
+// showLoading("#main-content");
+// $ajaxUtils.sendGetRequest(
+//   allCategoriesUrl,
+//   [...], // ***** <---- TODO: STEP 1: Substitute [...] ******
+//   true); // Explicitely setting the flag to get JSON from server processed into an object literal
+// });
 // *** finish **
 
 
